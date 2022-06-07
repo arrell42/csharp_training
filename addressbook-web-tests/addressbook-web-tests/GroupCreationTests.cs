@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
+
 namespace WebAddressBookTests
 {
     [TestFixture]
@@ -43,14 +44,20 @@ namespace WebAddressBookTests
         public void GroupCreationTest()
         {
             OpenHomePage();
-            Login(new AccountData("admin", "secret"));
+
+            AccountData account = new AccountData("name", "password");            
+            Login(account);
+
             GoToGroupsPage();
             InitNewGroupCreation();
-            GroupData group = new GroupData();
-            group.Name = "aaa";
-            group.Header = "ddd";
-            group.Footer = "fff";
+
+            GroupData group = new GroupData("aaa")
+            {                
+                Header = "ddd",
+                Footer = "fff"
+            };
             FillGroupForm(group);
+
             SubmitGroupCreation();
             ReturnToGroupsPage();
         }
@@ -90,7 +97,7 @@ namespace WebAddressBookTests
         }
 
         private void Login(AccountData account)
-        {            
+        {
             driver.FindElement(By.Name("user")).Click();
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
