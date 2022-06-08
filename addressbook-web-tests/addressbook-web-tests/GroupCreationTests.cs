@@ -22,7 +22,7 @@ namespace WebAddressBookTests
         public void SetupTest()
         {
             driver = new FirefoxDriver();
-            BaseURL = "http://localhost/addressbook";
+            BaseURL = "http://localhost/addressbook/";
             verificationErrors = new StringBuilder();
         }
 
@@ -45,7 +45,7 @@ namespace WebAddressBookTests
         {
             OpenHomePage();
 
-            AccountData account = new AccountData("name", "password");            
+            AccountData account = new AccountData("admin", "secret");            
             Login(account);
 
             GoToGroupsPage();

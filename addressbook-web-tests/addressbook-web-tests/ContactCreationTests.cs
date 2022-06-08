@@ -45,9 +45,9 @@ namespace WebAddressBookTests
 
             OpenHomePage();
 
-            AccountData account = new AccountData("name", "password");
+            AccountData account = new AccountData("admin", "secret");
             Login(account);
-
+            Thread.Sleep(5000);
             ContactData contact = new ContactData()
             {
                 Firstname = "firstname",
@@ -169,6 +169,7 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("user")).Click();
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys(account.Username);
+            Thread.Sleep(1000);
             driver.FindElement(By.Name("pass")).Clear();
             driver.FindElement(By.Name("pass")).SendKeys(account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
