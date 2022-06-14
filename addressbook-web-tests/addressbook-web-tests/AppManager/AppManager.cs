@@ -10,32 +10,50 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class TestBase
+    public class AppManager
     {
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
+        protected IWebDriver driver;        
         protected string baseURL;
+        private StringBuilder verificationErrors;
+
         //HELPERS
         protected HelperLogin helperLogin;
         protected HelperNavigation helperNavigation;
         protected HelperGroup helperGroup;
         protected HelperContact helperContact;
 
-        [SetUp]
-        public void SetupTest()
+
+        //HELPERS INIT
+        public AppManager()
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";
-            verificationErrors = new StringBuilder();
-            //HELPERS INIT
             helperLogin = new HelperLogin(driver);
             helperNavigation = new HelperNavigation(driver, baseURL);
             helperGroup = new HelperGroup(driver);
             helperContact = new HelperContact(driver);
+
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost/addressbook";
+            verificationErrors = new StringBuilder();
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public HelperLogin HelperLogin
+        {
+            get { return helperLogin; }
+        }
+        public HelperNavigation HelperNavigation
+        {
+            get { return helperNavigation; }
+        }
+        public HelperContact HelperContact
+        {
+            get { return helperContact; }
+        }
+        public HelperGroup HelperGroup
+        {
+            get { return helperGroup; }
+        }
+
+        public void Stop()
         {
             try
             {
@@ -45,8 +63,6 @@ namespace WebAddressBookTests
             {
                 // Ignore errors if unable to close the browser
             }
-            Assert.AreEqual("", verificationErrors.ToString());
         }
-         
     }
 }

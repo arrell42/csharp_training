@@ -16,10 +16,10 @@ namespace WebAddressBookTests
         public void ContactCreationTest()
         {
 
-            helperNavigation.OpenHomePage();
+            appManager.HelperNavigation.OpenHomePage();
 
             AccountData account = new AccountData("admin", "secret");
-            helperLogin.Login(account);            
+            appManager.HelperLogin.Login(account);            
             ContactData contact = new ContactData()
             {
                 Firstname = "firstname",
@@ -42,11 +42,11 @@ namespace WebAddressBookTests
                 Notes = "Notes",
             };
 
-            helperNavigation.AddNewContact();
-            helperContact.FillContactForm(contact);
-            helperContact.SelectGroupInContact();
-            helperContact.SelectDates();
-            helperContact.ClickInputButton();
+            appManager.HelperNavigation.AddNewContact();
+            appManager.HelperContact.FillContactForm(contact);
+            appManager.HelperContact.SelectGroupInContact();
+            appManager.HelperContact.SelectDates();
+            appManager.HelperContact.ClickInputButton();
 
         }                
 
