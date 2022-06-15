@@ -16,10 +16,15 @@ namespace WebAddressBookTests
 
         [SetUp]
         public void SetupTest()
-        {                      
-
+        {  
             appManager = new AppManager();
+
+            appManager.HelperNavigation.OpenHomePage();
+            AccountData account = new AccountData("admin", "secret");
+            appManager.HelperLogin.Login(account);
         }
+
+
 
         [TearDown]
         public void TeardownTest()

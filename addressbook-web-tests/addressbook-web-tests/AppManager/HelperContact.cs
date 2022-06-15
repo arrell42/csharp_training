@@ -12,7 +12,7 @@ namespace WebAddressBookTests
 {
     public class HelperContact : HelperBase
     {        
-        public HelperContact(IWebDriver driver) : base(driver)
+        public HelperContact(AppManager manager) : base(manager)
         {            
         }
         public void SelectDates()

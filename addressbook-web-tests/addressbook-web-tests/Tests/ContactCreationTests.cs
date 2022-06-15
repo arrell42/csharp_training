@@ -14,12 +14,7 @@ namespace WebAddressBookTests
     {     
         [Test]
         public void ContactCreationTest()
-        {
-
-            appManager.HelperNavigation.OpenHomePage();
-
-            AccountData account = new AccountData("admin", "secret");
-            appManager.HelperLogin.Login(account);            
+        {        
             ContactData contact = new ContactData()
             {
                 Firstname = "firstname",

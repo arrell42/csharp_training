@@ -17,22 +17,29 @@ namespace WebAddressBookTests
         [Test]
         public void GroupCreationTest()
         {
-            appManager.HelperNavigation.OpenHomePage();
-
-            AccountData account = new  AccountData("admin", "secret");
-            appManager.HelperLogin.Login(account);
-
-            appManager.HelperNavigation.GoToGroupsPage();
-            appManager.HelperGroup.InitNewGroupCreation();
+            
+            
+            
 
             GroupData group = new GroupData("aaa")
             {                
                 Header = "ddd",
                 Footer = "fff"
             };
-            appManager.HelperGroup.FillGroupForm(group);
-            appManager.HelperGroup.SubmitGroupCreation();
-            appManager.HelperGroup.ReturnToGroupsPage();
+            
+            appManager.HelperGroup.createGroup(group);
+
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("")
+            {
+                Header = "",
+                Footer = ""
+            };            
+            appManager.HelperGroup.createGroup(group);            
         }
 
     }

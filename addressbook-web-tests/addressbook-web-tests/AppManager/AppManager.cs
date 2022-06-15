@@ -26,16 +26,34 @@ namespace WebAddressBookTests
         //HELPERS INIT
         public AppManager()
         {
-            helperLogin = new HelperLogin(driver);
-            helperNavigation = new HelperNavigation(driver, baseURL);
-            helperGroup = new HelperGroup(driver);
-            helperContact = new HelperContact(driver);
-
             driver = new FirefoxDriver();
             baseURL = "http://localhost/addressbook";
             verificationErrors = new StringBuilder();
+
+            helperLogin = new HelperLogin(this);
+            helperNavigation = new HelperNavigation(this, baseURL);
+            helperGroup = new HelperGroup(this);
+            helperContact = new HelperContact(this);            
         }
 
+        
+
+        public IWebDriver Driver
+        {
+            get { return driver; }
+        }
+
+        public void Stop()
+        {
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
         public HelperLogin HelperLogin
         {
             get { return helperLogin; }
@@ -51,18 +69,6 @@ namespace WebAddressBookTests
         public HelperGroup HelperGroup
         {
             get { return helperGroup; }
-        }
-
-        public void Stop()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
         }
     }
 }
