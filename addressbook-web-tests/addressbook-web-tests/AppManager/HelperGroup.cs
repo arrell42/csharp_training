@@ -27,10 +27,33 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public HelperGroup Modify(int v, GroupData newData)
+        {
+            manager.HelperNavigation.GoToGroupsPage();
+            SelectGroup(v);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+        }
+
+        public HelperGroup SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public HelperGroup InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
         public HelperGroup RemoveGroup(int v)
         {
                 manager.HelperNavigation.GoToGroupsPage();                
-                SelectGroup(1);
+                SelectGroup(v);
                 RemoveGroup();
                 ReturnToGroupsPage();
                 return this;

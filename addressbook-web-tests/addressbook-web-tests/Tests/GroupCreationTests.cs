@@ -21,8 +21,7 @@ namespace WebAddressBookTests
             {                
                 Header = "ddd",
                 Footer = "fff"
-            };
-            
+            };            
             appManager.HelperGroup.createGroup(group);
         }
 
