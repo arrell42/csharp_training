@@ -19,13 +19,22 @@ namespace WebAddressBookTests
 
         public HelperGroup createGroup(GroupData group)
         {
-                manager.HelperNavigation.GoToGroupsPage();
-                InitNewGroupCreation();
-                FillGroupForm(group);
-                SubmitGroupCreation();
+            manager.HelperNavigation.GoToGroupsPage();
+            InitNewGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+            return this;
+        }
+
+        public HelperGroup RemoveGroup(int v)
+        {
+                manager.HelperNavigation.GoToGroupsPage();                
+                SelectGroup(1);
+                RemoveGroup();
                 ReturnToGroupsPage();
                 return this;
-        }
+        }        
 
         public HelperGroup InitNewGroupCreation()
         {
