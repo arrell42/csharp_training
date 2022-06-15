@@ -16,11 +16,7 @@ namespace WebAddressBookTests
 
         [Test]
         public void GroupCreationTest()
-        {
-            
-            
-            
-
+        {            
             GroupData group = new GroupData("aaa")
             {                
                 Header = "ddd",
@@ -28,7 +24,6 @@ namespace WebAddressBookTests
             };
             
             appManager.HelperGroup.createGroup(group);
-
         }
 
         [Test]

@@ -20,5 +20,10 @@ namespace WebAddressBookTests
             this.manager = manager;
             driver = manager.Driver;
         }
+
+        public HelperBase(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
     }
 }

@@ -15,7 +15,18 @@ namespace WebAddressBookTests
         public HelperContact(AppManager manager) : base(manager)
         {            
         }
-        public void SelectDates()
+
+        public HelperContact CreateContact(ContactData contact)
+        {
+                manager.HelperNavigation.AddNewContact();
+                FillContactForm(contact);
+                SelectGroupInContact();
+                SelectDates();
+                ClickInputButton();
+                return this;
+        }
+
+        public HelperContact SelectDates()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("1");
@@ -31,19 +42,22 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys("1999");
+            return this;
         }
 
-        public void SelectGroupInContact()
+        public HelperContact SelectGroupInContact()
         {
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText("aaa");
+            return this;
         }
 
-        public void ClickInputButton()
+        public HelperContact ClickInputButton()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public HelperContact FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -100,6 +114,7 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            return this;
         }
     }
 }

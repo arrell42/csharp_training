@@ -14,7 +14,7 @@ namespace WebAddressBookTests
     {     
         [Test]
         public void ContactCreationTest()
-        {        
+        {            
             ContactData contact = new ContactData()
             {
                 Firstname = "firstname",
@@ -37,12 +37,7 @@ namespace WebAddressBookTests
                 Notes = "Notes",
             };
 
-            appManager.HelperNavigation.AddNewContact();
-            appManager.HelperContact.FillContactForm(contact);
-            appManager.HelperContact.SelectGroupInContact();
-            appManager.HelperContact.SelectDates();
-            appManager.HelperContact.ClickInputButton();
-
+            appManager.HelperContact.CreateContact(contact);
         }                
 
     }

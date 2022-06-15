@@ -36,13 +36,6 @@ namespace WebAddressBookTests
             helperContact = new HelperContact(this);            
         }
 
-        
-
-        public IWebDriver Driver
-        {
-            get { return driver; }
-        }
-
         public void Stop()
         {
             try
@@ -54,6 +47,12 @@ namespace WebAddressBookTests
                 // Ignore errors if unable to close the browser
             }
         }
+
+        public IWebDriver Driver
+        {
+            get { return driver; }
+        }
+                
         public HelperLogin HelperLogin
         {
             get { return helperLogin; }
