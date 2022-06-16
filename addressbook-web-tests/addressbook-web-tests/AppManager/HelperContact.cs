@@ -26,9 +26,9 @@ namespace WebAddressBookTests
                 return this;
         }
 
-        public HelperContact RemoveContact()
+        public HelperContact RemoveContact(int v)
         {
-            SelectContact();
+            SelectContact(v);
             ClickDeleteButton();
             driver.SwitchTo().Alert().Accept();
             manager.HelperNavigation.OpenHomePage();
@@ -56,9 +56,9 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
-        public HelperContact SelectContact()
+        public HelperContact SelectContact(int index)
         {
-            driver.FindElement(By.Id("2")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
             return this;
         }
         
