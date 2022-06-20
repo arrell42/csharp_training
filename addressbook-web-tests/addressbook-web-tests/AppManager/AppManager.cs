@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -12,9 +13,8 @@ namespace WebAddressBookTests
 {
     public class AppManager
     {
-        protected IWebDriver driver;        
-        protected string baseURL;
-        private StringBuilder verificationErrors;
+        protected IWebDriver driver;
+        protected string baseURL;        
 
         //HELPERS
         protected HelperLogin helperLogin;
@@ -22,21 +22,22 @@ namespace WebAddressBookTests
         protected HelperGroup helperGroup;
         protected HelperContact helperContact;
 
+        public static ThreadLocal<AppManager> appManager = new ThreadLocal<AppManager>();
+
 
         //HELPERS INIT
-        public AppManager()
+        private AppManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";
-            verificationErrors = new StringBuilder();
+            baseURL = "http://localhost/addressbook";            
 
             helperLogin = new HelperLogin(this);
             helperNavigation = new HelperNavigation(this, baseURL);
             helperGroup = new HelperGroup(this);
-            helperContact = new HelperContact(this);            
+            helperContact = new HelperContact(this);
         }
-
-        public void Stop()
+                
+        ~AppManager()
         {
             try
             {
@@ -46,6 +47,17 @@ namespace WebAddressBookTests
             {
                 // Ignore errors if unable to close the browser
             }
+        }
+
+        
+
+        public static AppManager GetInstance()
+        {
+            if(!appManager.IsValueCreated)
+            {
+                appManager.Value = new AppManager();
+            }
+            return appManager.Value;
         }
 
         public IWebDriver Driver
