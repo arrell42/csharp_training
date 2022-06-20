@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -9,16 +11,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    [SetUpFixture]
-    public class TestSuiteFixture
+    public class AuthTestBase : TestBase
     {
-        
-
         [SetUp]
-        public void InitApplicationManager()
+
+        public void SetupLogin()
         {
-            AppManager appManager = AppManager.GetInstance();
-            appManager.HelperNavigation.OpenHomePage();
             appManager.HelperLogin.Login(new AccountData("admin", "secret"));
         }
     }

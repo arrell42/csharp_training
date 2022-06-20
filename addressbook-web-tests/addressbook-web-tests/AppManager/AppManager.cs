@@ -36,7 +36,19 @@ namespace WebAddressBookTests
             helperGroup = new HelperGroup(this);
             helperContact = new HelperContact(this);
         }
+
+        public static AppManager GetInstance()
+        {
+            if (! appManager.IsValueCreated)
+            {
+                AppManager newInstance = new AppManager();
+                newInstance.HelperNavigation.OpenHomePage();
+                appManager.Value = newInstance;
                 
+            }
+            return appManager.Value;
+        }
+
         ~AppManager()
         {
             try
@@ -47,17 +59,6 @@ namespace WebAddressBookTests
             {
                 // Ignore errors if unable to close the browser
             }
-        }
-
-        
-
-        public static AppManager GetInstance()
-        {
-            if(!appManager.IsValueCreated)
-            {
-                appManager.Value = new AppManager();
-            }
-            return appManager.Value;
         }
 
         public IWebDriver Driver
