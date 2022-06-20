@@ -18,8 +18,8 @@ namespace WebAddressBookTests
         {
             GroupData newData = new GroupData("zzz")
             {
-                Header = "ttt",
-                Footer = "qqq"
+                Header = null,
+                Footer = null
             };
             appManager.HelperGroup.Modify(1, newData);
         }
