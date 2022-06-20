@@ -17,10 +17,10 @@ namespace WebAddressBookTests
         protected string baseURL;        
 
         //HELPERS
-        protected HelperLogin helperLogin;
-        protected HelperNavigation helperNavigation;
-        protected HelperGroup helperGroup;
-        protected HelperContact helperContact;
+        protected LoginHelper helperLogin;
+        protected NavigationHelper helperNavigation;
+        protected GroupHelper helperGroup;
+        protected ContactHelper helperContact;
 
         public static ThreadLocal<AppManager> appManager = new ThreadLocal<AppManager>();
 
@@ -29,12 +29,12 @@ namespace WebAddressBookTests
         private AppManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";            
+            baseURL = "http://localhost";            
 
-            helperLogin = new HelperLogin(this);
-            helperNavigation = new HelperNavigation(this, baseURL);
-            helperGroup = new HelperGroup(this);
-            helperContact = new HelperContact(this);
+            helperLogin = new LoginHelper(this);
+            helperNavigation = new NavigationHelper(this, baseURL);
+            helperGroup = new GroupHelper(this);
+            helperContact = new ContactHelper(this);
         }
 
         public static AppManager GetInstance()
@@ -66,19 +66,19 @@ namespace WebAddressBookTests
             get { return driver; }
         }
                 
-        public HelperLogin HelperLogin
+        public LoginHelper HelperLogin
         {
             get { return helperLogin; }
         }
-        public HelperNavigation HelperNavigation
+        public NavigationHelper HelperNavigation
         {
             get { return helperNavigation; }
         }
-        public HelperContact HelperContact
+        public ContactHelper HelperContact
         {
             get { return helperContact; }
         }
-        public HelperGroup HelperGroup
+        public GroupHelper HelperGroup
         {
             get { return helperGroup; }
         }

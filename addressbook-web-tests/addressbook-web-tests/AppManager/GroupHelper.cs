@@ -11,13 +11,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class HelperGroup : HelperBase
+    public class GroupHelper : BaseHelper
     {        
-        public HelperGroup(AppManager manager) : base(manager)
+        public GroupHelper(AppManager manager) : base(manager)
         {            
         }
 
-        public HelperGroup createGroup(GroupData group)
+        public GroupHelper CreateGroup(GroupData group)
         {
             manager.HelperNavigation.GoToGroupsPage();
             InitNewGroupCreation();
@@ -27,7 +27,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public HelperGroup Modify(int v, GroupData newData)
+        public GroupHelper Modify(int v, GroupData newData)
         {
             manager.HelperNavigation.GoToGroupsPage();
             SelectGroup(v);
@@ -38,19 +38,19 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public HelperGroup SubmitGroupModification()
+        public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
-        public HelperGroup InitGroupModification()
+        public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
 
-        public HelperGroup RemoveGroup(int v)
+        public GroupHelper RemoveGroup(int v)
         {
                 manager.HelperNavigation.GoToGroupsPage();                
                 SelectGroup(v);
@@ -59,13 +59,13 @@ namespace WebAddressBookTests
                 return this;
         }        
 
-        public HelperGroup InitNewGroupCreation()
+        public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
 
-        public HelperGroup FillGroupForm(GroupData group)
+        public GroupHelper FillGroupForm(GroupData group)
         {            
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
@@ -75,26 +75,26 @@ namespace WebAddressBookTests
 
         
 
-        public HelperGroup SubmitGroupCreation()
+        public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
             return this;
         }
 
-        public HelperGroup ReturnToGroupsPage()
+        public GroupHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
             driver.FindElement(By.LinkText("Logout")).Click();
             return this;
         }
 
-        public HelperGroup SelectGroup(int index)
+        public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("//input[@name='selected[]'][" + index + "]")).Click();
             return this;
         }
 
-        public HelperGroup RemoveGroup()
+        public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();
             return this;

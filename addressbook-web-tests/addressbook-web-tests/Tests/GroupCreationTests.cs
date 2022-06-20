@@ -22,7 +22,7 @@ namespace WebAddressBookTests
                 Header = "ddd",
                 Footer = "fff"
             };            
-            appManager.HelperGroup.createGroup(group);
+            appManager.HelperGroup.CreateGroup(group);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace WebAddressBookTests
                 Header = "",
                 Footer = ""
             };            
-            appManager.HelperGroup.createGroup(group);            
+            appManager.HelperGroup.CreateGroup(group);            
         }
 
     }

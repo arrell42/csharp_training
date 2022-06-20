@@ -10,10 +10,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class HelperLogin : HelperBase
+    public class LoginHelper : BaseHelper
     {
 
-        public HelperLogin(AppManager manager) : base(manager)
+        public LoginHelper(AppManager manager) : base(manager)
         {            
         }
         public void Login(AccountData account)

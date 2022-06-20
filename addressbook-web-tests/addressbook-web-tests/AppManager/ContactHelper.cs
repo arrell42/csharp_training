@@ -10,13 +10,13 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressBookTests
 {
-    public class HelperContact : HelperBase
+    public class ContactHelper : BaseHelper
     {        
-        public HelperContact(AppManager manager) : base(manager)
+        public ContactHelper(AppManager manager) : base(manager)
         {            
         }
 
-        public HelperContact CreateContact(ContactData contact)
+        public ContactHelper CreateContact(ContactData contact)
         {
                 manager.HelperNavigation.AddNewContact();
                 FillContactForm(contact);
@@ -26,7 +26,7 @@ namespace WebAddressBookTests
                 return this;
         }
 
-        public HelperContact RemoveContact(int v)
+        public ContactHelper RemoveContact(int v)
         {
             SelectContact(v);
             ClickDeleteButton();
@@ -35,7 +35,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public HelperContact ModifyContact(ContactData newData)
+        public ContactHelper ModifyContact(ContactData newData)
         {
             EditContact();
             FillContactForm(newData);
@@ -48,30 +48,30 @@ namespace WebAddressBookTests
 
 
         //Методы низкого уровня
-        public HelperContact ClickDeleteButton()
+        public ContactHelper ClickDeleteButton()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
         }
-        public HelperContact SelectContact(int index)
+        public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
             return this;
         }
         
-        public HelperContact UpdateContact()
+        public ContactHelper UpdateContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
             return this;
         }
 
-        public HelperContact EditContact()
+        public ContactHelper EditContact()
         {
             driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[2]/td[8]/a")).Click();
             return this;
         }
 
-        public HelperContact SelectDates()
+        public ContactHelper SelectDates()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("1");
@@ -90,7 +90,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public HelperContact FillContactForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             Type(By.Name("firstname"), contact.Firstname);
             Type(By.Name("middlename"), contact.Middlename);
@@ -103,13 +103,13 @@ namespace WebAddressBookTests
         }
 
 
-        public HelperContact SelectGroupInContact()
+        public ContactHelper SelectGroupInContact()
         {
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText("aaa");
             return this;
         }
 
-        public HelperContact ClickInputButton()
+        public ContactHelper ClickInputButton()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
             return this;
