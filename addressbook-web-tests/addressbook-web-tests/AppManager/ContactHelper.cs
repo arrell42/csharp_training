@@ -29,7 +29,7 @@ namespace WebAddressBookTests
 
         public ContactHelper RemoveContact(int v, ContactData contact)
         {
-            if (ContactNotPresent())
+            if (ContactNotexist())
             {
                 CreateContact(contact);
             }
@@ -41,11 +41,15 @@ namespace WebAddressBookTests
         }
 
         
-        public bool ContactNotPresent() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
+        public bool ContactNotexist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         
 
-        public ContactHelper ModifyContact(ContactData newData)
+        public ContactHelper ModifyContact(ContactData contact, ContactData newData)
         {
+            if (ContactNotexist())
+            {
+                CreateContact(contact);
+            }
             EditContact();
             FillContactForm(newData);
             UpdateContact();

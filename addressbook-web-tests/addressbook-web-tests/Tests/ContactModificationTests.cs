@@ -16,18 +16,29 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
+            ContactData contact = new ContactData()
+            {
+                Firstname = "firstname",
+                Middlename = "MiddleName",
+                Lastname = "LastName",
+                Nickname = "NickName",
+                Title = "Title",
+                Company = "Company",
+                Address = "Address",                
+            };
+
             ContactData newData = new ContactData()
             {
                 Firstname = "Modifyfirstname",
                 Middlename = "ModifyMiddleName",
-                Lastname = "ModifyLastName",
-                Nickname = "ModifyNickName",
-                Title = "ModifyTitle",
-                Company = "ModifyCompany",
-                Address = "ModifyAddress",                
+                Lastname = null,
+                Nickname = null,
+                Title = null,
+                Company = null,
+                Address = null,
             };
 
-            appManager.HelperContact.ModifyContact(newData);
+            appManager.HelperContact.ModifyContact(contact, newData);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace WebAddressBookTests
         {
             manager.HelperNavigation.GoToGroupsPage();           
             
-            if (GroupNotPresent())
+            if (GroupNotExist())
             {
                 CreateGroup(newData);                
             }
@@ -41,12 +41,10 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public bool GroupNotPresent() => driver.FindElements(By.XPath("//span[@class='group']")).Count == 0;
-
         public GroupHelper Modify(int v, GroupData newData, GroupData data)
         {
             manager.HelperNavigation.GoToGroupsPage();
-            if (GroupNotPresent())
+            if (GroupNotExist())
             {
                 CreateGroup(data);
             }
@@ -60,7 +58,10 @@ namespace WebAddressBookTests
 
 
 
-        //низкоуровневые методы
+        // низкоуровневые методы
+
+        public bool GroupNotExist() => driver.FindElements(By.XPath("//span[@class='group']")).Count == 0;
+
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
