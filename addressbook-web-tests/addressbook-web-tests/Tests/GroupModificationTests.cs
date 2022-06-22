@@ -16,12 +16,18 @@ namespace WebAddressBookTests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("12345")
+            GroupData newData = new GroupData("modifyData")
             {
                 Header = null,
                 Footer = null
             };
-            appManager.HelperGroup.Modify(1, newData);
+
+            GroupData data = new GroupData("newGroupBeforeModify")
+            {
+                Header = null,
+                Footer = null
+            };
+            appManager.HelperGroup.Modify(1, newData, data);
         }
     }
 }

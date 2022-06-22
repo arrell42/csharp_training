@@ -43,12 +43,12 @@ namespace WebAddressBookTests
 
         public bool GroupNotPresent() => driver.FindElements(By.XPath("//span[@class='group']")).Count == 0;
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(int v, GroupData newData, GroupData data)
         {
             manager.HelperNavigation.GoToGroupsPage();
             if (GroupNotPresent())
             {
-                CreateGroup(newData);
+                CreateGroup(data);
             }
             SelectGroup(v);
             InitGroupModification();
