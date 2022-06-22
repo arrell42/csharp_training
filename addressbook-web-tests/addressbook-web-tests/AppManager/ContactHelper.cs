@@ -20,20 +20,29 @@ namespace WebAddressBookTests
         {
                 manager.HelperNavigation.AddNewContact();
                 FillContactForm(contact);
-                SelectGroupInContact();
-                SelectDates();
+                //SelectGroupInContact();
+                //SelectDates();
                 ClickInputButton();
+                ReturnToHomePage();
                 return this;
         }
 
-        public ContactHelper RemoveContact(int v)
+        public ContactHelper RemoveContact(int v, ContactData contact)
         {
+            if (ContactNotPresent())
+            {
+                CreateContact(contact);
+            }
             SelectContact(v);
             ClickDeleteButton();
             driver.SwitchTo().Alert().Accept();
             manager.HelperNavigation.OpenHomePage();
             return this;
         }
+
+        
+        public bool ContactNotPresent() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
+        
 
         public ContactHelper ModifyContact(ContactData newData)
         {
@@ -115,6 +124,13 @@ namespace WebAddressBookTests
             return this;
         }
 
-        
+        public ContactHelper ReturnToHomePage()
+        {
+            driver.FindElement(By.XPath("//a[@href= 'index.php']")).Click();
+            return this;
+
+        }
+
+
     }
 }
