@@ -43,8 +43,7 @@ namespace WebAddressBookTests
             {
                 AppManager newInstance = new AppManager();
                 newInstance.HelperNavigation.OpenHomePage();
-                appManager.Value = newInstance;
-                
+                appManager.Value = newInstance;                
             }
             return appManager.Value;
         }

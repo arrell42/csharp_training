@@ -16,7 +16,12 @@ namespace WebAddressBookTests
         [Test]
         public void GroupRemovalTest()
         {
-            appManager.HelperGroup.RemoveGroup(1);                       
+            GroupData newData = new GroupData("fff")
+            {
+                Header = null,
+                Footer = null
+            };
+            appManager.HelperGroup.RemoveGroup(1, newData);                       
         }
                   
     }

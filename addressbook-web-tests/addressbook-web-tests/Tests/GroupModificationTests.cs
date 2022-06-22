@@ -16,7 +16,7 @@ namespace WebAddressBookTests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newData = new GroupData("zzz")
+            GroupData newData = new GroupData("12345")
             {
                 Header = null,
                 Footer = null

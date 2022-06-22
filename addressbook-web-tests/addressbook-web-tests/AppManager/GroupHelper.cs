@@ -27,9 +27,29 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public GroupHelper RemoveGroup(int v, GroupData newData)
+        {
+            manager.HelperNavigation.GoToGroupsPage();           
+            
+            if (GroupNotPresent())
+            {
+                CreateGroup(newData);                
+            }
+            SelectGroup(v);
+            RemoveGroup();
+            ReturnToGroupsPage();
+            return this;
+        }
+
+        public bool GroupNotPresent() => driver.FindElements(By.XPath("//span[@class='group']")).Count == 0;
+
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.HelperNavigation.GoToGroupsPage();
+            if (GroupNotPresent())
+            {
+                CreateGroup(newData);
+            }
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -38,6 +58,9 @@ namespace WebAddressBookTests
             return this;
         }
 
+
+
+        //низкоуровневые методы
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -49,16 +72,6 @@ namespace WebAddressBookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
-
-        public GroupHelper RemoveGroup(int v)
-        {
-                manager.HelperNavigation.GoToGroupsPage();                
-                SelectGroup(v);
-                RemoveGroup();
-                ReturnToGroupsPage();
-                return this;
-        }        
-
         public GroupHelper InitNewGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -73,8 +86,6 @@ namespace WebAddressBookTests
             return this;
         }
 
-        
-
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
@@ -84,15 +95,16 @@ namespace WebAddressBookTests
         public GroupHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
-            driver.FindElement(By.LinkText("Logout")).Click();
+            //driver.FindElement(By.LinkText("Logout")).Click();
             return this;
         }
 
         public GroupHelper SelectGroup(int index)
-        {
+        {            
             driver.FindElement(By.XPath("//input[@name='selected[]'][" + index + "]")).Click();
             return this;
         }
+                
 
         public GroupHelper RemoveGroup()
         {
