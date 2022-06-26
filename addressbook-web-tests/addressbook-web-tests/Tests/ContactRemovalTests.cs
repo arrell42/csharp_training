@@ -15,12 +15,22 @@ namespace WebAddressBookTests
     {
         [Test]
         public void ContactRemovalTest()
-        {
-            ContactData contact = new ContactData()
+        {  
+            if (appManager.HelperContact.ContactNotexist())
             {
-                Firstname = "sdfsdg"
-            };
-            appManager.HelperContact.RemoveContact(2, contact);
+                ContactData contact = new ContactData()
+                {
+                    Firstname = "firstname",
+                    Middlename = "MiddleName",
+                    Lastname = "LastName",
+                    Nickname = "NickName",
+                    Title = "Title",
+                    Company = "Company",
+                    Address = "Address",
+                };
+                appManager.HelperContact.CreateContact(contact);
+            }
+            appManager.HelperContact.RemoveContact(2);
         }
 
     }

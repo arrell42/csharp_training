@@ -27,12 +27,8 @@ namespace WebAddressBookTests
                 return this;
         }
 
-        public ContactHelper RemoveContact(int v, ContactData contact)
+        public ContactHelper RemoveContact(int v)
         {
-            if (ContactNotexist())
-            {
-                CreateContact(contact);
-            }
             SelectContact(v);
             ClickDeleteButton();
             driver.SwitchTo().Alert().Accept();
@@ -44,13 +40,9 @@ namespace WebAddressBookTests
         public bool ContactNotexist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         
 
-        public ContactHelper ModifyContact(ContactData contact, ContactData newData)
+        public ContactHelper ModifyContact(int v, ContactData newData)
         {
-            if (ContactNotexist())
-            {
-                CreateContact(contact);
-            }
-            EditContact();
+            EditContact(v);
             FillContactForm(newData);
             UpdateContact();
             manager.HelperNavigation.OpenHomePage();
@@ -78,9 +70,9 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public ContactHelper EditContact()
+        public ContactHelper EditContact(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[2]/td[8]/a")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ index +"]/td[8]/a")).Click();
             return this;
         }
 

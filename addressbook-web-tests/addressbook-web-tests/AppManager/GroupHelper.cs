@@ -27,27 +27,18 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public GroupHelper RemoveGroup(int v, GroupData newData)
+        public GroupHelper RemoveGroup(int v)
         {
-            manager.HelperNavigation.GoToGroupsPage();           
-            
-            if (GroupNotExist())
-            {
-                CreateGroup(newData);                
-            }
+            manager.HelperNavigation.GoToGroupsPage();
             SelectGroup(v);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
 
-        public GroupHelper Modify(int v, GroupData newData, GroupData data)
+        public GroupHelper Modify(int v, GroupData newData)
         {
-            manager.HelperNavigation.GoToGroupsPage();
-            if (GroupNotExist())
-            {
-                CreateGroup(data);
-            }
+            manager.HelperNavigation.GoToGroupsPage();            
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
