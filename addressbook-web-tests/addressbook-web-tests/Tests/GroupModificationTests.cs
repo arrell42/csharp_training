@@ -16,7 +16,7 @@ namespace WebAddressBookTests
         [Test]
         public void GroupModificationTest()
         {   
-            GroupData data = new GroupData("newGroupBeforeModify")
+            GroupData newData = new GroupData("newGroupBeforeModify")
             {
                 Header = null,
                 Footer = null
@@ -30,7 +30,16 @@ namespace WebAddressBookTests
                 };
                 appManager.HelperGroup.CreateGroup(group);
             }
-            appManager.HelperGroup.Modify(0, data);
+
+            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+
+            appManager.HelperGroup.Modify(0, newData);
+
+            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
