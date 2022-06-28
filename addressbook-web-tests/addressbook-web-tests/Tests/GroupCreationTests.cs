@@ -23,6 +23,7 @@ namespace WebAddressBookTests
                 Header = "ddd",
                 Footer = "fff"
             };
+
             List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
 
             appManager.HelperGroup.CreateGroup(group);

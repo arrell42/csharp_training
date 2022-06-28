@@ -30,7 +30,7 @@ namespace WebAddressBookTests
                 };
                 appManager.HelperGroup.CreateGroup(group);
             }
-            appManager.HelperGroup.Modify(1, data);
+            appManager.HelperGroup.Modify(0, data);
         }
     }
 }
