@@ -27,7 +27,7 @@ namespace WebAddressBookTests
                 Address = null,
             };
 
-            if (appManager.HelperContact.ContactNotexist())
+            if (appManager.HelperContact.ContactNotExist())
             {
                 ContactData contact = new ContactData()
                 {

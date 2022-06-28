@@ -16,7 +16,7 @@ namespace WebAddressBookTests
         [Test]
         public void ContactRemovalTest()
         {  
-            if (appManager.HelperContact.ContactNotexist())
+            if (appManager.HelperContact.ContactNotExist())
             {
                 ContactData contact = new ContactData()
                 {

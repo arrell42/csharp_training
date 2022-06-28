@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -21,8 +22,13 @@ namespace WebAddressBookTests
             {                
                 Header = "ddd",
                 Footer = "fff"
-            };            
+            };
+            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+
             appManager.HelperGroup.CreateGroup(group);
+
+            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            Assert.AreEqual(oldGroups.Count +1, newGroups.Count);
         }
 
         [Test]
@@ -32,8 +38,14 @@ namespace WebAddressBookTests
             {
                 Header = "",
                 Footer = ""
-            };            
-            appManager.HelperGroup.CreateGroup(group);            
+            };
+
+            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+
+            appManager.HelperGroup.CreateGroup(group);
+
+            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
         }
 
     }

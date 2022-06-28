@@ -37,7 +37,7 @@ namespace WebAddressBookTests
         }
 
         
-        public bool ContactNotexist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
+        public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         
 
         public ContactHelper ModifyContact(int v, ContactData newData)
