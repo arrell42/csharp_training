@@ -25,10 +25,16 @@ namespace WebAddressBookTests
                 Address = "Address",                
             };
 
+            // создаем список
             List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
 
+            // создаем контакт
             appManager.HelperContact.CreateContact(contact);
+                        
+            // сравниваем хэш
+            Assert.AreEqual(oldContacts.Count + 1, appManager.HelperContact.GetContactCount());
 
+            // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();

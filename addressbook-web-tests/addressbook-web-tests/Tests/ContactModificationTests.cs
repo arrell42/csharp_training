@@ -38,10 +38,16 @@ namespace WebAddressBookTests
                 appManager.HelperContact.CreateContact(contact);
             }
 
+            // создаем список
             List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
 
+            // модифицируем контакт
             appManager.HelperContact.ModifyContact(2, newData);
 
+            // сравниваем хэш
+            Assert.AreEqual(oldContacts.Count, appManager.HelperContact.GetContactCount());
+
+            // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();
             oldContacts[2].Firstname = newData.Firstname;            
             oldContacts.Sort();

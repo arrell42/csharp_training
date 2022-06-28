@@ -45,27 +45,41 @@ namespace WebAddressBookTests
             return this;
         }
 
+        
 
 
 
-        //Методы низкого уровня
-
+        // оптимизация кеширования
+        private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.HelperNavigation.AddNewContact();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.contacts"));
-            foreach (IWebElement element in elements)
-            {  
-                contacts.Add(new ContactData(element.Text, element.Text));
+            if(contactCache == null)
+            {
+                contactCache = new List<ContactData>();
+                List<ContactData> contacts = new List<ContactData>();
+                manager.HelperNavigation.AddNewContact();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.contacts"));
+                foreach (IWebElement element in elements)
+                {
+                    contactCache.Add(new ContactData(element.Text, element.Text));
+                }
             }
-            return contacts;
+            return new List<ContactData>(contactCache);
         }
+
+        // хэширование
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("span.contacts")).Count;
+        }
+
+        //Методы низкого уровня
 
         public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         public ContactHelper ClickDeleteButton()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            contactCache = null;
             return this;
         }
         public ContactHelper SelectContact(int index)
@@ -77,6 +91,7 @@ namespace WebAddressBookTests
         public ContactHelper UpdateContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -127,6 +142,7 @@ namespace WebAddressBookTests
         public ContactHelper ClickInputButton()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
+            contactCache = null;
             return this;
         }
 

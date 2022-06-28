@@ -29,10 +29,16 @@ namespace WebAddressBookTests
                 appManager.HelperContact.CreateContact(contact);
             }
 
+            // создаем список
             List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
 
+            // удаляем контакт
             appManager.HelperContact.RemoveContact(2);
 
+            // сравниваем хэш
+            Assert.AreEqual(oldContacts.Count - 1, appManager.HelperContact.GetContactCount());
+
+            // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();
             oldContacts.RemoveAt(2);
             Assert.AreEqual(oldContacts, newContacts);

@@ -68,12 +68,16 @@ namespace WebAddressBookTests
                 Footer = ""
             };
 
+            // создаем список
             List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
 
+            // создаем группу
             appManager.HelperGroup.CreateGroup(group);
 
+            // сравниваем хэш
             Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count + 1);
 
+            // сравниваем содержимое
             List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
