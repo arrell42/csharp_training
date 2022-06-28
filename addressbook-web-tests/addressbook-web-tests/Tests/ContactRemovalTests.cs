@@ -18,11 +18,9 @@ namespace WebAddressBookTests
         {  
             if (appManager.HelperContact.ContactNotExist())
             {
-                ContactData contact = new ContactData()
-                {
-                    Firstname = "firstname",
-                    Middlename = "MiddleName",
-                    Lastname = "LastName",
+                ContactData contact = new ContactData("firstname", "LastName")
+                {                    
+                    Middlename = "MiddleName",                    
                     Nickname = "NickName",
                     Title = "Title",
                     Company = "Company",
@@ -30,7 +28,14 @@ namespace WebAddressBookTests
                 };
                 appManager.HelperContact.CreateContact(contact);
             }
+
+            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+
             appManager.HelperContact.RemoveContact(2);
+
+            List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            oldContacts.RemoveAt(2);
+            Assert.AreEqual(oldContacts, newContacts);
         }
 
     }

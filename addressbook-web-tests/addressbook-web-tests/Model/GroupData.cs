@@ -31,7 +31,10 @@ namespace WebAddressBookTests
             return Name == other.Name;                
         }
 
-        public int HashCode => Name.GetHashCode();
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
 
         public override string ToString()
         {

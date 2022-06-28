@@ -27,18 +27,6 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public List<GroupData> GetGroupList()
-        {
-            List<GroupData> groups = new List<GroupData>();
-            manager.HelperNavigation.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach(IWebElement element in elements)
-            {                
-                groups.Add(new GroupData(element.Text));
-            }
-            return groups;
-        }
-
         public GroupHelper RemoveGroup(int v)
         {
             manager.HelperNavigation.GoToGroupsPage();
@@ -62,6 +50,18 @@ namespace WebAddressBookTests
 
 
         // низкоуровневые методы
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.HelperNavigation.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
 
         public bool GroupNotExist() => driver.FindElements(By.XPath("//span[@class='group']")).Count == 0;
 
@@ -98,8 +98,7 @@ namespace WebAddressBookTests
 
         public GroupHelper ReturnToGroupsPage()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-            //driver.FindElement(By.LinkText("Logout")).Click();
+            driver.FindElement(By.LinkText("group page")).Click();            
             return this;
         }
 

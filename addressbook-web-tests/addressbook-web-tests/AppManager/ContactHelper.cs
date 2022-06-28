@@ -18,13 +18,13 @@ namespace WebAddressBookTests
 
         public ContactHelper CreateContact(ContactData contact)
         {
-                manager.HelperNavigation.AddNewContact();
-                FillContactForm(contact);
-                //SelectGroupInContact();
-                //SelectDates();
-                ClickInputButton();
-                ReturnToHomePage();
-                return this;
+            manager.HelperNavigation.AddNewContact();
+            FillContactForm(contact);
+            //SelectGroupInContact();
+            //SelectDates();
+            ClickInputButton();
+            ReturnToHomePage();
+            return this;
         }
 
         public ContactHelper RemoveContact(int v)
@@ -35,10 +35,6 @@ namespace WebAddressBookTests
             manager.HelperNavigation.OpenHomePage();
             return this;
         }
-
-        
-        public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
-        
 
         public ContactHelper ModifyContact(int v, ContactData newData)
         {
@@ -53,6 +49,20 @@ namespace WebAddressBookTests
 
 
         //Методы низкого уровня
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.HelperNavigation.AddNewContact();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.contacts"));
+            foreach (IWebElement element in elements)
+            {  
+                contacts.Add(new ContactData(element.Text, element.Text));
+            }
+            return contacts;
+        }
+
+        public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         public ContactHelper ClickDeleteButton()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();

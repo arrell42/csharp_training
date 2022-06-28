@@ -16,11 +16,9 @@ namespace WebAddressBookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData newData = new ContactData()
-            {
-                Firstname = "Modifyfirstname",
-                Middlename = "ModifyMiddleName",
-                Lastname = null,
+            ContactData newData = new ContactData("Modifyfirstname", null)
+            {                
+                Middlename = "ModifyMiddleName",                
                 Nickname = null,
                 Title = null,
                 Company = null,
@@ -29,11 +27,9 @@ namespace WebAddressBookTests
 
             if (appManager.HelperContact.ContactNotExist())
             {
-                ContactData contact = new ContactData()
-                {
-                    Firstname = "firstname",
-                    Middlename = "MiddleName",
-                    Lastname = "LastName",
+                ContactData contact = new ContactData("firstname", "LastName")
+                {                    
+                    Middlename = "MiddleName",                    
                     Nickname = "NickName",
                     Title = "Title",
                     Company = "Company",
@@ -41,7 +37,16 @@ namespace WebAddressBookTests
                 };
                 appManager.HelperContact.CreateContact(contact);
             }
+
+            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+
             appManager.HelperContact.ModifyContact(2, newData);
+
+            List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            oldContacts[2].Firstname = newData.Firstname;            
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
