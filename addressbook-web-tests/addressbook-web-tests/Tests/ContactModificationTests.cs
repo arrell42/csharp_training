@@ -40,6 +40,7 @@ namespace WebAddressBookTests
 
             // создаем список
             List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+            ContactData oldData = oldContacts[2];
 
             // модифицируем контакт
             appManager.HelperContact.ModifyContact(2, newData);
@@ -49,10 +50,20 @@ namespace WebAddressBookTests
 
             // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();
-            oldContacts[2].Firstname = newData.Firstname;            
+            oldContacts[2].Firstname = newData.Firstname;
+            oldContacts[2].Lastname = newData.Lastname;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in oldContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Firstname, contact.Firstname);
+                    Assert.AreEqual(newData.Lastname, contact.Lastname);
+                }
+            }
         }
     }
 }

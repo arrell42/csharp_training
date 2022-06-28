@@ -30,7 +30,7 @@ namespace WebAddressBookTests
             }
 
             // создаем список
-            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();           
 
             // удаляем контакт
             appManager.HelperContact.RemoveContact(2);
@@ -40,8 +40,14 @@ namespace WebAddressBookTests
 
             // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            ContactData toBeRemoved = oldContacts[2];
             oldContacts.RemoveAt(2);
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach(ContactData contact in oldContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
         }
 
     }

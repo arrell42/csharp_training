@@ -61,7 +61,10 @@ namespace WebAddressBookTests
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.contacts"));
                 foreach (IWebElement element in elements)
                 {
-                    contactCache.Add(new ContactData(element.Text, element.Text));
+                    contactCache.Add(new ContactData(element.Text, element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                 }
             }
             return new List<ContactData>(contactCache);
@@ -72,6 +75,7 @@ namespace WebAddressBookTests
         {
             return driver.FindElements(By.CssSelector("span.contacts")).Count;
         }
+
 
         //Методы низкого уровня
 
