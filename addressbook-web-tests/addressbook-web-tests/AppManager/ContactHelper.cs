@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -23,7 +24,7 @@ namespace WebAddressBookTests
             //SelectGroupInContact();
             //SelectDates();
             ClickInputButton();
-            ReturnToHomePage();
+            ReturnToHomePage();            
             return this;
         }
 
@@ -57,12 +58,11 @@ namespace WebAddressBookTests
             {
                 contactCache = new List<ContactData>();
                 List<ContactData> contacts = new List<ContactData>();
-                manager.HelperNavigation.AddNewContact();
-                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.contacts"));
+                manager.HelperNavigation.OpenHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
                 foreach (IWebElement element in elements)
                 {
-                    contactCache.Add(new ContactData(element.Text, element.Text)
-                    {
+                    contactCache.Add(new ContactData(element.Text, element.Text){
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     });
                 }
@@ -73,7 +73,7 @@ namespace WebAddressBookTests
         // хэширование
         public int GetContactCount()
         {
-            return driver.FindElements(By.CssSelector("span.contacts")).Count;
+            return driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count;
         }
 
 

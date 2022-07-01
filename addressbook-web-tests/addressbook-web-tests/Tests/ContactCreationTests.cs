@@ -15,15 +15,9 @@ namespace WebAddressBookTests
     {     
         [Test]
         public void ContactCreationTest()
-        {            
-            ContactData contact = new ContactData("firstname", "LastName")
-            {                
-                Middlename = "MiddleName",                
-                Nickname = "NickName",
-                Title = "Title",
-                Company = "Company",
-                Address = "Address",                
-            };
+        {
+            ContactData contact = new ContactData("firstname", "lastName");
+            
 
             // создаем список
             List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
@@ -32,7 +26,7 @@ namespace WebAddressBookTests
             appManager.HelperContact.CreateContact(contact);
                         
             // сравниваем хэш
-            Assert.AreEqual(oldContacts.Count + 1, appManager.HelperContact.GetContactCount());
+            Assert.AreEqual(appManager.HelperContact.GetContactCount(), oldContacts.Count + 1);
 
             // сравниваем содержимое
             List<ContactData> newContacts = appManager.HelperContact.GetContactList();

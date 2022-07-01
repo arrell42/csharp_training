@@ -50,13 +50,11 @@ namespace WebAddressBookTests
 
         // оптимизация кеширования
         private List<GroupData> groupCache = null;
-
         public List<GroupData> GetGroupList()
         {
             if (groupCache == null)
             {
                 groupCache = new List<GroupData>();
-
                 List<GroupData> groups = new List<GroupData>();
                 manager.HelperNavigation.GoToGroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
