@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -191,6 +192,14 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//a[@href= 'index.php']")).Click();
             return this;
 
+        }
+
+        public int GetNumberOfSearchResults()
+        {
+            manager.NavigationHelper.OpenHomePage();
+            string text =  driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
         }
 
 
