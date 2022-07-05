@@ -17,27 +17,27 @@ namespace WebAddressBookTests
         [Test]
         public void GroupRemovalTest()
         {
-            if (appManager.HelperGroup.GroupNotExist())
+            if (appManager.GroupHelper.GroupNotExist())
             {
                 GroupData group = new GroupData("aaa")
                 {
                     Header = "ddd",
                     Footer = "fff"
                 };
-                appManager.HelperGroup.CreateGroup(group);
+                appManager.GroupHelper.CreateGroup(group);
             }
 
             // создаем список
-            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
 
             // удаляем группу
-            appManager.HelperGroup.RemoveGroup(0);
+            appManager.GroupHelper.RemoveGroup(0);
 
             // сравниваем хэш
-            Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count - 1);
+            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count - 1);
 
             // сравниваем содержимое
-            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             // сохраняем Id удаляемой группы
             GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);

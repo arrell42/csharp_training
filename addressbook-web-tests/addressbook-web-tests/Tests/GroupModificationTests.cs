@@ -21,30 +21,30 @@ namespace WebAddressBookTests
                 Header = null,
                 Footer = null
             };
-            if (appManager.HelperGroup.GroupNotExist())
+            if (appManager.GroupHelper.GroupNotExist())
             {
                 GroupData group = new GroupData("aaa")
                 {
                     Header = "ddd",
                     Footer = "fff"
                 };
-                appManager.HelperGroup.CreateGroup(group);
+                appManager.GroupHelper.CreateGroup(group);
             }
 
             // создаем список
-            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
             // сохраняем Id изменяемой группы
             GroupData oldData = oldGroups[0];
 
 
             // модифицируем группу
-            appManager.HelperGroup.Modify(0, newData);
+            appManager.GroupHelper.Modify(0, newData);
 
             // сравниваем хэш
-            Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count);
+            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count);
 
             // сравниваем содержимое
-            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();

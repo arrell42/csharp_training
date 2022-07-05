@@ -16,28 +16,28 @@ namespace WebAddressBookTests
         public void LoginWithValidCredentials()
         {
             // prepare
-            appManager.HelperLogin.Logout();
+            appManager.LoginHelper.Logout();
 
             // action
             AccountData account = new AccountData("admin", "secret");
-            appManager.HelperLogin.Login(account);
+            appManager.LoginHelper.Login(account);
 
             // verification
-            Assert.IsTrue(appManager.HelperLogin.IsLoggedIn());
+            Assert.IsTrue(appManager.LoginHelper.IsLoggedIn());
         }
 
         [Test]
         public void LoginWithInvalidCredentials()
         {
             // prepare
-            appManager.HelperLogin.Logout();
+            appManager.LoginHelper.Logout();
 
             // action
             AccountData account = new AccountData("admin", "123456");
-            appManager.HelperLogin.Login(account);
+            appManager.LoginHelper.Login(account);
 
             // verification
-            Assert.IsFalse(appManager.HelperLogin.IsLoggedIn());
+            Assert.IsFalse(appManager.LoginHelper.IsLoggedIn());
         }
 
     }

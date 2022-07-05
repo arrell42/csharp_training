@@ -17,7 +17,7 @@ namespace WebAddressBookTests
 
         public void SetupLogin()
         {
-            appManager.HelperLogin.Login(new AccountData("admin", "secret"));
+            appManager.LoginHelper.Login(new AccountData("admin", "secret"));
         }
     }
 }

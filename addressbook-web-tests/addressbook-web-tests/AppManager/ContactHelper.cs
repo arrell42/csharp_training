@@ -19,7 +19,7 @@ namespace WebAddressBookTests
 
         public ContactHelper CreateContact(ContactData contact)
         {
-            manager.HelperNavigation.AddNewContact();
+            manager.NavigationHelper.AddNewContact();
             FillContactForm(contact);
             //SelectGroupInContact();
             //SelectDates();
@@ -28,21 +28,57 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public ContactData GetContactInformationFromEditForm(int index)
+        {
+            manager.NavigationHelper.OpenHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+            string lastname = cells[1].Text;
+            string firstname = cells[2].Text;
+            string address = cells[3].Text;
+            string allphones = cells[5].Text;
+
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = allphones
+            };
+        }
+
+        public ContactData GetContactInformationFromTable(int index)
+        {
+            manager.NavigationHelper.OpenHomePage();
+            manager.ContactHelper.EditContactButtonClick(index);
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone
+            };
+        }
+
         public ContactHelper RemoveContact(int v)
         {
             SelectContact(v);
             ClickDeleteButton();
             driver.SwitchTo().Alert().Accept();
-            manager.HelperNavigation.OpenHomePage();
+            manager.NavigationHelper.OpenHomePage();
             return this;
         }
 
         public ContactHelper ModifyContact(int v, ContactData newData)
         {
-            EditContact(v);
+            EditContactButtonClick(v);
             FillContactForm(newData);
             UpdateContact();
-            manager.HelperNavigation.OpenHomePage();
+            manager.NavigationHelper.OpenHomePage();
             return this;
         }
 
@@ -58,7 +94,7 @@ namespace WebAddressBookTests
             {
                 contactCache = new List<ContactData>();
                 List<ContactData> contacts = new List<ContactData>();
-                manager.HelperNavigation.OpenHomePage();
+                manager.NavigationHelper.OpenHomePage();
                 ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
                 foreach (IWebElement element in elements)
                 {
@@ -99,7 +135,7 @@ namespace WebAddressBookTests
             return this;
         }
 
-        public ContactHelper EditContact(int index)
+        public ContactHelper EditContactButtonClick(int index)
         {
             driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ index +"]/td[8]/a")).Click();
             return this;

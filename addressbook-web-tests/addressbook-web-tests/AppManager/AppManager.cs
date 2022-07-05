@@ -42,7 +42,7 @@ namespace WebAddressBookTests
             if (! appManager.IsValueCreated)
             {
                 AppManager newInstance = new AppManager();
-                newInstance.HelperNavigation.OpenHomePage();
+                newInstance.NavigationHelper.OpenHomePage();
                 appManager.Value = newInstance;                
             }
             return appManager.Value;
@@ -65,19 +65,19 @@ namespace WebAddressBookTests
             get { return driver; }
         }
                 
-        public LoginHelper HelperLogin
+        public LoginHelper LoginHelper
         {
             get { return helperLogin; }
         }
-        public NavigationHelper HelperNavigation
+        public NavigationHelper NavigationHelper
         {
             get { return helperNavigation; }
         }
-        public ContactHelper HelperContact
+        public ContactHelper ContactHelper
         {
             get { return helperContact; }
         }
-        public GroupHelper HelperGroup
+        public GroupHelper GroupHelper
         {
             get { return helperGroup; }
         }

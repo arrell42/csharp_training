@@ -25,7 +25,7 @@ namespace WebAddressBookTests
                 Address = null,
             };
 
-            if (appManager.HelperContact.ContactNotExist())
+            if (appManager.ContactHelper.ContactNotExist())
             {
                 ContactData contact = new ContactData("firstname", "LastName")
                 {                    
@@ -35,21 +35,21 @@ namespace WebAddressBookTests
                     Company = "Company",
                     Address = "Address",
                 };
-                appManager.HelperContact.CreateContact(contact);
+                appManager.ContactHelper.CreateContact(contact);
             }
 
             // создаем список
-            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();
             ContactData oldData = oldContacts[2];
 
             // модифицируем контакт
-            appManager.HelperContact.ModifyContact(2, newData);
+            appManager.ContactHelper.ModifyContact(2, newData);
 
             // сравниваем хэш
-            Assert.AreEqual(oldContacts.Count, appManager.HelperContact.GetContactCount());
+            Assert.AreEqual(oldContacts.Count, appManager.ContactHelper.GetContactCount());
 
             // сравниваем содержимое
-            List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts[2].Firstname = newData.Firstname;
             oldContacts[2].Lastname = newData.Lastname;
             oldContacts.Sort();

@@ -24,13 +24,13 @@ namespace WebAddressBookTests
                 Footer = "fff"
             };
 
-            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
 
-            appManager.HelperGroup.CreateGroup(group);
+            appManager.GroupHelper.CreateGroup(group);
             
-            Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count + 1);
+            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
 
-            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -46,13 +46,13 @@ namespace WebAddressBookTests
                 Footer = ""
             };
 
-            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
 
-            appManager.HelperGroup.CreateGroup(group);
+            appManager.GroupHelper.CreateGroup(group);
 
-            Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count + 1);
+            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
 
-            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -69,16 +69,16 @@ namespace WebAddressBookTests
             };
 
             // создаем список
-            List<GroupData> oldGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
 
             // создаем группу
-            appManager.HelperGroup.CreateGroup(group);
+            appManager.GroupHelper.CreateGroup(group);
 
             // сравниваем хэш
-            Assert.AreEqual(appManager.HelperGroup.GetGroupCount(), oldGroups.Count + 1);
+            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
 
             // сравниваем содержимое
-            List<GroupData> newGroups = appManager.HelperGroup.GetGroupList();
+            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();

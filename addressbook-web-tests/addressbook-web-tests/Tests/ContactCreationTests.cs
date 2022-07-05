@@ -20,16 +20,16 @@ namespace WebAddressBookTests
             
 
             // создаем список
-            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();
 
             // создаем контакт
-            appManager.HelperContact.CreateContact(contact);
+            appManager.ContactHelper.CreateContact(contact);
                         
             // сравниваем хэш
-            Assert.AreEqual(appManager.HelperContact.GetContactCount(), oldContacts.Count + 1);
+            Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count + 1);
 
             // сравниваем содержимое
-            List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

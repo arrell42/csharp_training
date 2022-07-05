@@ -16,7 +16,7 @@ namespace WebAddressBookTests
         [Test]
         public void ContactRemovalTest()
         {  
-            if (appManager.HelperContact.ContactNotExist())
+            if (appManager.ContactHelper.ContactNotExist())
             {
                 ContactData contact = new ContactData("firstname", "LastName")
                 {                    
@@ -26,20 +26,20 @@ namespace WebAddressBookTests
                     Company = "Company",
                     Address = "Address",
                 };
-                appManager.HelperContact.CreateContact(contact);
+                appManager.ContactHelper.CreateContact(contact);
             }
 
             // создаем список
-            List<ContactData> oldContacts = appManager.HelperContact.GetContactList();           
+            List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();           
 
             // удаляем контакт
-            appManager.HelperContact.RemoveContact(2);
+            appManager.ContactHelper.RemoveContact(2);
 
             // сравниваем хэш
-            Assert.AreEqual(oldContacts.Count - 1, appManager.HelperContact.GetContactCount());
+            Assert.AreEqual(oldContacts.Count - 1, appManager.ContactHelper.GetContactCount());
 
             // сравниваем содержимое
-            List<ContactData> newContacts = appManager.HelperContact.GetContactList();
+            List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             ContactData toBeRemoved = oldContacts[2];
             oldContacts.RemoveAt(2);
             Assert.AreEqual(oldContacts, newContacts);
