@@ -15,11 +15,11 @@ namespace WebAddressBookTests
 
         public bool Equals(GroupData other)
         {
-            if(Object.ReferenceEquals(other, null))
+            if(ReferenceEquals(other, null))
             {
                 return false;
             }
-            if(Object.ReferenceEquals(this, other))
+            if(ReferenceEquals(this, other))
             {
                 return true;
             }
@@ -33,12 +33,12 @@ namespace WebAddressBookTests
 
         public override string ToString()
         {
-            return Name;
+            return "name" + Name;
         }
 
         public int CompareTo(GroupData other)
         {
-            if(Object.ReferenceEquals(other, null))
+            if(ReferenceEquals(other, null))
             {
                 return 1;
             }
@@ -50,7 +50,6 @@ namespace WebAddressBookTests
         public string Name { get; set; }
         public string Header { get; set; }
         public string Footer { get; set; }
-
         public string Id { get; set; }
     }
 }
