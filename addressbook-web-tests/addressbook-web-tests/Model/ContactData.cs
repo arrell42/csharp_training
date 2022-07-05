@@ -85,7 +85,7 @@ namespace WebAddressBookTests
             }
             set
             {
-                AllPhones = value;
+                allPhones = value;
             }
         }
         public string Fax { get; set; }
