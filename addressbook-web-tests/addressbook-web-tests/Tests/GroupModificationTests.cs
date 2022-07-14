@@ -36,7 +36,6 @@ namespace WebAddressBookTests
             // сохраняем Id изменяемой группы
             GroupData oldData = oldGroups[0];
 
-
             // модифицируем группу
             appManager.GroupHelper.Modify(0, newData);
 

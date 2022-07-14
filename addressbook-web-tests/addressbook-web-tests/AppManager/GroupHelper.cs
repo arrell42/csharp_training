@@ -54,8 +54,7 @@ namespace WebAddressBookTests
         {
             if (groupCache == null)
             {
-                groupCache = new List<GroupData>();
-                List<GroupData> groups = new List<GroupData>();
+                groupCache = new List<GroupData>();                
                 manager.NavigationHelper.GoToGroupsPage();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
@@ -137,8 +136,7 @@ namespace WebAddressBookTests
         {            
             driver.FindElement(By.XPath("//input[@name='selected[]'][" + (index+1) + "]")).Click();
             return this;
-        }
-                
+        }                
 
         public GroupHelper RemoveGroupButtonClick()
         {

@@ -26,7 +26,7 @@ namespace WebAddressBookTests
             {
                 return true;
             }
-            return (Firstname == other.Firstname) && (Lastname == other.Lastname);
+            return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
@@ -45,15 +45,8 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            if (ReferenceEquals(this, other))
-            {
-                return  Firstname.CompareTo(other.Firstname);
-            }
-            if (ReferenceEquals(this, other))
-            {
-                return Lastname.CompareTo(other.Lastname);
-            }
-            return 0;
+            return Firstname.CompareTo(other.Firstname);
+
         }
 
         // очистка от лишних символов ("", "-", "(" )

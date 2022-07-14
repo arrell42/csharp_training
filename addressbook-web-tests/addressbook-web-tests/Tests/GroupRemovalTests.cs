@@ -34,7 +34,7 @@ namespace WebAddressBookTests
             appManager.GroupHelper.RemoveGroup(0);
 
             // сравниваем хэш
-            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count - 1);
+            Assert.AreEqual(oldGroups.Count - 1, appManager.GroupHelper.GetGroupCount());
 
             // сравниваем содержимое
             List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
