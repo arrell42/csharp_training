@@ -32,22 +32,6 @@ namespace WebAddressBookTests
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.NavigationHelper.OpenHomePage();
-            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
-            string lastname = cells[1].Text;
-            string firstname = cells[2].Text;
-            string address = cells[3].Text;
-            string allphones = cells[5].Text;
-
-            return new ContactData(firstname, lastname)
-            {
-                Address = address,
-                AllPhones = allphones
-            };
-        }
-
-        public ContactData GetContactInformationFromTable(int index)
-        {
-            manager.NavigationHelper.OpenHomePage();
             manager.ContactHelper.EditContactButtonClick(index);
             string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
@@ -62,6 +46,22 @@ namespace WebAddressBookTests
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
+            };
+        }
+
+        public ContactData GetContactInformationFromTable(int index)
+        {
+            manager.NavigationHelper.OpenHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+            string lastname = cells[1].Text;
+            string firstname = cells[2].Text;
+            string address = cells[3].Text;
+            string allphones = cells[5].Text;
+
+            return new ContactData(firstname, lastname)
+            {
+                Address = address,
+                AllPhones = allphones
             };
         }
 
