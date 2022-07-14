@@ -31,13 +31,12 @@ namespace WebAddressBookTests
 
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode();
+            return Firstname.GetHashCode();             
         }        
 
         public override string ToString()
         {
             return Firstname;
-
         }
 
         public int CompareTo(ContactData other)
@@ -46,7 +45,15 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname);
+            if (ReferenceEquals(this, other))
+            {
+                return  Firstname.CompareTo(other.Firstname);
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return Lastname.CompareTo(other.Lastname);
+            }
+            return 0;
         }
 
         // очистка от лишних символов ("", "-", "(" )
