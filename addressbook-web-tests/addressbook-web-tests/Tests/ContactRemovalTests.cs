@@ -28,26 +28,16 @@ namespace WebAddressBookTests
                 };
                 appManager.ContactHelper.CreateContact(contact);
             }
-
-            // создаем список
+            
             List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();           
 
             // удаляем контакт
-            appManager.ContactHelper.RemoveContact(2);
-
-            // сравниваем хэш
-            Assert.AreEqual(oldContacts.Count - 1, appManager.ContactHelper.GetContactCount());
-
-            // сравниваем содержимое
+            appManager.ContactHelper.RemoveContact(0);
+            
             List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
-            ContactData toBeRemoved = oldContacts[2];
-            oldContacts.RemoveAt(2);
+            oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
 
-            foreach(ContactData contact in oldContacts)
-            {
-                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
-            }
         }
 
     }

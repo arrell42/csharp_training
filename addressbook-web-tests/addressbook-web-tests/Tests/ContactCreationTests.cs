@@ -16,19 +16,14 @@ namespace WebAddressBookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData("firstname", "lastName");
-            
+            ContactData contact = new ContactData("firstname", "lastName");           
 
             // создаем список
             List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();
 
             // создаем контакт
             appManager.ContactHelper.CreateContact(contact);
-                        
-            // сравниваем хэш
-            Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count + 1);
 
-            // сравниваем содержимое
             List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts.Add(contact);
             oldContacts.Sort();

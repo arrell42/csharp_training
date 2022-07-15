@@ -18,35 +18,35 @@ namespace WebAddressBookTests
 
         public bool Equals(ContactData other)
         {
-            if (ReferenceEquals(other, null))
-            {   
+            if(other == null)
+            {
                 return false;
             }
-            if (ReferenceEquals(this, other))
+            if(this == other)
             {
                 return true;
             }
             return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
+        /*
         public override int GetHashCode()
         {
-            return Firstname.GetHashCode();             
-        }        
-
+            return Firstname.GetHashCode() ^ Lastname.GetHashCode();
+        }
+        */
         public override string ToString()
         {
-            return "firstname= " + Firstname + "lastname= " + Lastname;
+            return "firstname= " + Firstname + "\nlastname= " + Lastname;
         }
 
         public int CompareTo(ContactData other)
         {
-            if (ReferenceEquals(other, null))
+            if(other == null)
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname);
-
+            return Firstname.CompareTo(other.Firstname) ^ Lastname.CompareTo(other.Lastname);
         }
 
         // очистка от лишних символов ("", "-", "(" )

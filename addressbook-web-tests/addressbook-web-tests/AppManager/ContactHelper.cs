@@ -41,7 +41,7 @@ namespace WebAddressBookTests
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
             return new ContactData(firstname, lastname)
-            {
+            {                
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
@@ -59,7 +59,7 @@ namespace WebAddressBookTests
             string allphones = cells[5].Text;
 
             return new ContactData(firstname, lastname)
-            {
+            {                
                 Address = address,
                 AllPhones = allphones
             };
@@ -71,6 +71,7 @@ namespace WebAddressBookTests
             ClickDeleteButton();
             driver.SwitchTo().Alert().Accept();
             manager.NavigationHelper.OpenHomePage();
+            Thread.Sleep(500);
             return this;
         }
 
@@ -83,28 +84,21 @@ namespace WebAddressBookTests
             return this;
         }
 
-        
 
 
-
-        // оптимизация кеширования
-        private List<ContactData> contactCache = null;
         public List<ContactData> GetContactList()
         {
-            if(contactCache == null)
+            List<ContactData> contacts = new List<ContactData>();
+            manager.NavigationHelper.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach(IWebElement element in elements)
             {
-                contactCache = new List<ContactData>();
-                List<ContactData> contacts = new List<ContactData>();
-                manager.NavigationHelper.OpenHomePage();
-                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
-                foreach (IWebElement element in elements)
-                {
-                    contactCache.Add(new ContactData(element.Text, element.Text){
-                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
-                    });
-                }
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                string lastname = cells[1].Text;
+                string firstname = cells[2].Text;
+                contacts.Add(new ContactData(firstname, lastname));
             }
-            return new List<ContactData>(contactCache);
+            return contacts;
         }
 
         // хэширование
@@ -119,26 +113,24 @@ namespace WebAddressBookTests
         public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         public ContactHelper ClickDeleteButton()
         {
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            contactCache = null;
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();            
             return this;
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + (index+2) + "]/td/input")).Click();
             return this;
         }
         
         public ContactHelper UpdateContact()
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
-            contactCache = null;
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();            
             return this;
         }
 
         public ContactHelper EditContactButtonClick(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ index +"]/td[8]/a")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ (index+2) +"]/td[8]/a")).Click();
             return this;
         }
 
@@ -182,8 +174,7 @@ namespace WebAddressBookTests
 
         public ContactHelper ClickInputButton()
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();
-            contactCache = null;
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[21]")).Click();            
             return this;
         }
 
