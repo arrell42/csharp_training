@@ -29,12 +29,12 @@ namespace WebAddressBookTests
             return Firstname == other.Firstname && Lastname == other.Lastname;
         }
 
-        /*
+        
         public override int GetHashCode()
         {
             return Firstname.GetHashCode() ^ Lastname.GetHashCode();
         }
-        */
+        
         public override string ToString()
         {
             return "firstname= " + Firstname + "\nlastname= " + Lastname;
@@ -46,7 +46,16 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            return Firstname.CompareTo(other.Firstname) ^ Lastname.CompareTo(other.Lastname);
+            if(Lastname == other.Lastname)
+            {
+                return 0;
+            }
+            if(Firstname == other.Firstname)
+            {
+                return 0;
+            }
+
+            return Firstname.CompareTo(other.Firstname);
         }
 
         // очистка от лишних символов ("", "-", "(" )
