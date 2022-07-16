@@ -23,7 +23,17 @@ namespace WebAddressBookTests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
         }
-        
+
+        [Test]
+        public void TestContactDetails()
+        {
+            ContactData fromTable = appManager.ContactHelper.GetContactInformationFromTable(0);
+            ContactData fromForm = appManager.ContactHelper.GetContactInformationFromEditForm(0);
+
+            Assert.AreEqual(fromTable, fromForm);
+            Assert.AreEqual(fromTable.Address, fromForm.Address);
+            Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
+        }
 
 
     }
