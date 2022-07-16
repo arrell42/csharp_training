@@ -9,12 +9,14 @@ namespace WebAddressBookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string allPhones;
+        private string allPhones;        
+
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
             Lastname = lastname;
         }
+        
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string Lastname { get; set; }
@@ -51,7 +53,16 @@ namespace WebAddressBookTests
         public string Phone2 { get; set; }
         public string Notes { get; set; }
         public string Id { get; set; }
-
+        
+        // очистка от лишних символов ("", "-", "(" )
+        public string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }
 
         public bool Equals(ContactData other)
         {
@@ -96,15 +107,7 @@ namespace WebAddressBookTests
             return Firstname.CompareTo(other.Firstname);
         }
 
-        // очистка от лишних символов ("", "-", "(" )
-        public string CleanUp(string phone)
-        {
-            if(phone == null || phone == "")
-            {
-                return "";
-            }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
-        }
+        
 
 
         

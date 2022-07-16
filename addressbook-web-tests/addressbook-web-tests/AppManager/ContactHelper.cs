@@ -41,13 +41,26 @@ namespace WebAddressBookTests
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
             return new ContactData(firstname, lastname)
-            {                
+            {   
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
             };
         }
+
+        /*
+        public ContactData GetContactInformationFromDetails()
+        {
+            manager.NavigationHelper.OpenHomePage();
+            DetailsButtonClick(0);
+
+            string content = driver.FindElement(By.Id("content")).Text;
+
+            return new ContactData();
+
+        }
+        */
 
         public ContactData GetContactInformationFromTable(int index)
         {
@@ -59,11 +72,12 @@ namespace WebAddressBookTests
             string allphones = cells[5].Text;
 
             return new ContactData(firstname, lastname)
-            {                
+            {   
                 Address = address,
                 AllPhones = allphones
             };
         }
+
         public ContactHelper RemoveContact(int v)
         {
             SelectContact(v);
@@ -112,6 +126,12 @@ namespace WebAddressBookTests
 
 
         //Методы низкого уровня
+
+        public ContactHelper DetailsButtonClick(int index)
+        {
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ (index+2) +"]/td[7]/a")).Click();
+            return this;
+        }
 
         public bool ContactNotExist() => driver.FindElements(By.XPath("//tr[@name = 'entry']")).Count == 0;
         public ContactHelper ClickDeleteButton()
