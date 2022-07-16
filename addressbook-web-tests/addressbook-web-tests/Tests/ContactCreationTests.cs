@@ -23,6 +23,8 @@ namespace WebAddressBookTests
 
             // создаем контакт
             appManager.ContactHelper.CreateContact(contact);
+            // проверка хэшей
+            Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count + 1);
 
             List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts.Add(contact);

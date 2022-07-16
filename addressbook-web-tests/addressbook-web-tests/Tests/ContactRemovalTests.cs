@@ -33,7 +33,9 @@ namespace WebAddressBookTests
 
             // удаляем контакт
             appManager.ContactHelper.RemoveContact(0);
-            
+
+            Assert.AreEqual(oldContacts.Count - 1, appManager.ContactHelper.GetContactCount());
+
             List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);

@@ -15,60 +15,6 @@ namespace WebAddressBookTests
             Firstname = firstname;
             Lastname = lastname;
         }
-
-        public bool Equals(ContactData other)
-        {
-            if(other == null)
-            {
-                return false;
-            }
-            if(this == other)
-            {
-                return true;
-            }
-            return Firstname == other.Firstname && Lastname == other.Lastname;
-        }
-
-        
-        public override int GetHashCode()
-        {
-            return Firstname.GetHashCode() ^ Lastname.GetHashCode();
-        }
-        
-        public override string ToString()
-        {
-            return "firstname= " + Firstname + "\nlastname= " + Lastname;
-        }
-
-        public int CompareTo(ContactData other)
-        {
-            if(other == null)
-            {
-                return 1;
-            }
-            if(Lastname == other.Lastname)
-            {
-                return 0;
-            }
-            if(Firstname == other.Firstname)
-            {
-                return 0;
-            }
-
-            return Firstname.CompareTo(other.Firstname);
-        }
-
-        // очистка от лишних символов ("", "-", "(" )
-        public string CleanUp(string phone)
-        {
-            if(phone == null || phone == "")
-            {
-                return "";
-            }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
-        }
-
-
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string Lastname { get; set; }
@@ -101,10 +47,66 @@ namespace WebAddressBookTests
         public string Email { get; set; }
         public string Email2 { get; set; }
         public string Email3 { get; set; }
-        public string HomePagePhone { get; set; }        
+        public string HomePagePhone { get; set; }
         public string Phone2 { get; set; }
         public string Notes { get; set; }
-
         public string Id { get; set; }
+
+
+        public bool Equals(ContactData other)
+        {
+            if(other == null)
+            {
+                return false;
+            }
+            if(this == other)
+            {
+                return true;
+            }
+            return Firstname == other.Firstname && Lastname == other.Lastname;
+        }
+
+        // хеширование
+        public override int GetHashCode()
+        {
+            return Firstname.GetHashCode() ^ Lastname.GetHashCode();
+        }
+        
+        public override string ToString()
+        {
+            return "firstname= " + Firstname + "\nlastname= " + Lastname;
+        }
+
+        // сравнение списков на "большее"/"меньшее"
+        public int CompareTo(ContactData other)
+        {
+            if(other == null)
+            {
+                return 1;
+            }
+            if(Lastname == other.Lastname)
+            {
+                return 0;
+            }
+            if(Firstname == other.Firstname)
+            {
+                return 0;
+            }
+
+            return Firstname.CompareTo(other.Firstname);
+        }
+
+        // очистка от лишних символов ("", "-", "(" )
+        public string CleanUp(string phone)
+        {
+            if(phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+        }
+
+
+        
     }
 }

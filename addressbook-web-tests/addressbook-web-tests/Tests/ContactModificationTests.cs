@@ -43,7 +43,9 @@ namespace WebAddressBookTests
 
             // модифицируем контакт
             appManager.ContactHelper.ModifyContact(0, newData);
-            
+
+            Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count);
+
             List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
             oldContacts[0].Firstname = newData.Firstname;
             oldContacts[0].Lastname = newData.Lastname;
