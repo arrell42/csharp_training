@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -28,7 +29,24 @@ namespace WebAddressBookTests
             return groups;
         }
 
-        [Test, TestCaseSource("RandomGroupDataProvider")]        
+        public static IEnumerable<GroupData> GroupDataFromFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            string[] lines = File.ReadAllLines(@"groups.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                groups.Add(new GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+                });
+                
+            }
+            return groups;
+        }
+
+        [Test, TestCaseSource("GroupDataFromFile")]        
         public void GroupCreationTest(GroupData group)
         {   
             List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
@@ -37,32 +55,6 @@ namespace WebAddressBookTests
             
             Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
 
-            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-        }
-
-        [Test]
-        public void BadNameGroupCreationTest()
-        {
-            GroupData group = new GroupData("a'a")
-            {
-                Header = "",
-                Footer = ""
-            };
-
-            // создаем список
-            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
-
-            // создаем группу
-            appManager.GroupHelper.CreateGroup(group);
-
-            // сравниваем хэш
-            Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
-
-            // сравниваем содержимое
             List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
             oldGroups.Add(group);
             oldGroups.Sort();

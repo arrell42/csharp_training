@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginTests.cs" />
+    <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTest.cs" />
     <Compile Include="Tests\ContactRemovalTests.cs" />
@@ -84,6 +84,9 @@
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="groups.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
