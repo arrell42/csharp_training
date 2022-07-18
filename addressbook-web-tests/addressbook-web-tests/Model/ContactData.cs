@@ -91,19 +91,14 @@ namespace WebAddressBookTests
         // сравнение списков на "большее"/"меньшее"
         public int CompareTo(ContactData other)
         {
-            if(other == null)
+            if(other is null)
             {
                 return 1;
             }
-            if(Lastname == other.Lastname)
+            if(Lastname != other.Lastname)
             {
-                return 0;
+                return 1;
             }
-            if(Firstname == other.Firstname)
-            {
-                return 0;
-            }
-
             return Firstname.CompareTo(other.Firstname);
         }
 

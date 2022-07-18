@@ -44,7 +44,7 @@ namespace WebAddressBookTests
 
         public int CompareTo(GroupData other)
         {
-            if(ReferenceEquals(other, null))
+            if(other is null)
             {
                 return 1;
             }
