@@ -15,6 +15,7 @@ namespace WebAddressBookTests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
+        // генератор рандомных строк 
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -29,6 +30,7 @@ namespace WebAddressBookTests
             return groups;
         }
 
+        // генератор рандомных строк из файла
         public static IEnumerable<GroupData> GroupDataFromFile()
         {
             List<GroupData> groups = new List<GroupData>();
@@ -40,11 +42,12 @@ namespace WebAddressBookTests
                 {
                     Header = parts[1],
                     Footer = parts[2]
-                });
-                
+                });                
             }
             return groups;
         }
+
+
 
         [Test, TestCaseSource("GroupDataFromFile")]        
         public void GroupCreationTest(GroupData group)

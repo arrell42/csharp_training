@@ -84,6 +84,9 @@
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="contacts.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="groups.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
