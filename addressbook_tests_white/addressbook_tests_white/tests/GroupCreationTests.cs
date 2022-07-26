@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace addressbook_tests_autoit
+namespace addressbook_tests_white
 {
     [TestFixture]
     public class GroupCreationTests : TestBase
@@ -14,7 +14,7 @@ namespace addressbook_tests_autoit
 
             GroupData newGroup = new GroupData()
             {
-                Name = "Test"
+                Name = "White"
             };
 
             app.Groups.Add(newGroup);

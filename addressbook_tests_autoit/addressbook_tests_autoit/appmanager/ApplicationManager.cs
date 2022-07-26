@@ -28,7 +28,7 @@ namespace addressbook_tests_autoit
             aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.62e44910");
         }
 
-        public GroupHelper Aux
+        public AutoItX Aux
         {
             get
             {
