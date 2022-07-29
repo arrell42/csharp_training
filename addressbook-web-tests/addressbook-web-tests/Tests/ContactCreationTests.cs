@@ -8,6 +8,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace WebAddressBookTests
 {
@@ -27,7 +29,7 @@ namespace WebAddressBookTests
             return contacts;
         }
 
-        public static IEnumerable<ContactData> ContactDataFromFile()
+        public static IEnumerable<ContactData> ContactDataFromCsvFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             string[] lines = File.ReadAllLines(@"contacts.csv");
@@ -38,8 +40,15 @@ namespace WebAddressBookTests
             }
             return contacts;
         }
+        public static IEnumerable<ContactData> GroupDataFromXmlFile()
+        {
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                    .Deserialize(new StreamReader(@"contacts.xml"));
+        }
 
-        [Test, TestCaseSource("ContactDataFromFile")]
+
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreationTest(ContactData contact)
         {   
             // создаем список
