@@ -10,6 +10,8 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WebAddressBookTests
 {
@@ -40,15 +42,45 @@ namespace WebAddressBookTests
             }
             return contacts;
         }
-        public static IEnumerable<ContactData> GroupDataFromXmlFile()
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
         {
             return (List<ContactData>)
                 new XmlSerializer(typeof(List<ContactData>))
                     .Deserialize(new StreamReader(@"contacts.xml"));
         }
 
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
+        }
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        public static IEnumerable<ContactData> ContactDataFromExcelFile()
+        {
+            List<ContactData> groups = new List<ContactData>();
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"contacts.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
+            {
+                groups.Add(new ContactData()
+                {
+                    Firstname = range.Cells[i, 1].Value,
+                    Lastname = range.Cells[i, 2].Value                    
+                });
+            }
+            wb.Close();
+            app.Visible = false;
+            app.Quit();
+            return groups;
+
+        }
+
+
+
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void ContactCreationTest(ContactData contact)
         {   
             // создаем список

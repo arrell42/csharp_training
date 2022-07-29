@@ -9,8 +9,12 @@ namespace WebAddressBookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string allPhones;        
+        private string allPhones;
 
+        public ContactData()
+        {
+            
+        }
         public ContactData(string firstname, string lastname)
         {
             Firstname = firstname;
