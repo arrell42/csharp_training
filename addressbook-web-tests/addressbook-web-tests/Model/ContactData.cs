@@ -95,9 +95,9 @@ namespace WebAddressBookTests
             {
                 return 1;
             }
-            if(Lastname != other.Lastname)
+            if(Lastname == other.Lastname)
             {
-                return 1;
+                return 0;
             }
             return Firstname.CompareTo(other.Firstname);
         }
