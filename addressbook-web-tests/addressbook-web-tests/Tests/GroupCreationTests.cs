@@ -18,7 +18,7 @@ using System.Linq;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         // генератор рандомных строк 
         public static IEnumerable<GroupData> RandomGroupDataProvider()
@@ -94,13 +94,13 @@ namespace WebAddressBookTests
         [Test, TestCaseSource("GroupDataFromExcelFile")]        
         public void GroupCreationTest(GroupData group)
         {   
-            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllGroups();
 
             appManager.GroupHelper.CreateGroup(group);
             
             Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count + 1);
 
-            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllGroups();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();

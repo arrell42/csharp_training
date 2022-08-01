@@ -29,7 +29,6 @@ namespace WebAddressBookTests
         {            
             ContactData fromForm = appManager.ContactHelper.GetContactInformationFromEditForm(0);
             //ContactData fromDetails = appManager.ContactHelper.GetContactInformationFromDetails();
-
             
 
         }

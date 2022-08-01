@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -39,14 +39,14 @@ namespace WebAddressBookTests
                 appManager.ContactHelper.CreateContact(contact);
             }
             
-            List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();            
-
+            List<ContactData> oldContacts = ContactData.GetAllContacts();
+            ContactData toBeMod = oldContacts[0];
             // модифицируем контакт
-            appManager.ContactHelper.ModifyContact(0, newData);
+            appManager.ContactHelper.ModifyContact(toBeMod, newData);
 
             Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count);
 
-            List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllContacts();
             oldContacts[0].Firstname = newData.Firstname;
             oldContacts[0].Lastname = newData.Lastname;
             oldContacts.Sort();

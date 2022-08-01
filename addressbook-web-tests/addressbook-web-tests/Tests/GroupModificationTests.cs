@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
         [Test]
         public void GroupModificationTest()
@@ -32,18 +32,18 @@ namespace WebAddressBookTests
             }
 
             // создаем список
-            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAllGroups();
             // сохраняем Id изменяемой группы
-            GroupData oldData = oldGroups[0];
+            GroupData toBeMod = oldGroups[0];
 
             // модифицируем группу
-            appManager.GroupHelper.Modify(0, newData);
+            appManager.GroupHelper.Modify(toBeMod, newData);
 
             // сравниваем хэш
             Assert.AreEqual(appManager.GroupHelper.GetGroupCount(), oldGroups.Count);
 
             // сравниваем содержимое
-            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAllGroups();
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
@@ -51,7 +51,7 @@ namespace WebAddressBookTests
             // сравниваем Id измененной группы (должны совпадать)
             foreach (GroupData group in newGroups)
             {
-                if(group.Id == oldData.Id)
+                if(group.Id == toBeMod.Id)
                 {
                     Assert.AreEqual(newData.Name, group.Name);
                 }

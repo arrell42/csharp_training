@@ -17,7 +17,7 @@ using System.Linq;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class ContactCreationTests : AuthTestBase
+    public class ContactCreationTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomGroupDataProvider()
         {
@@ -85,14 +85,14 @@ namespace WebAddressBookTests
         public void ContactCreationTest(ContactData contact)
         {   
             // создаем список
-            List<ContactData> oldContacts = appManager.ContactHelper.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAllContacts();
 
             // создаем контакт
             appManager.ContactHelper.CreateContact(contact);
             // проверка хэшей
             Assert.AreEqual(appManager.ContactHelper.GetContactCount(), oldContacts.Count + 1);
 
-            List<ContactData> newContacts = appManager.ContactHelper.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAllContacts();
             oldContacts.Add(contact);
             oldContacts.Sort();
             newContacts.Sort();

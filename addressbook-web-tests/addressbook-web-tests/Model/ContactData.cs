@@ -65,7 +65,7 @@ namespace WebAddressBookTests
         public string Phone2 { get; set; }
         public string Notes { get; set; }
 
-        [Column(Name = "lastname")]
+        [Column(Name = "id")]
         public string Id { get; set; }
         
         // очистка от лишних символов ("", "-", "(" )

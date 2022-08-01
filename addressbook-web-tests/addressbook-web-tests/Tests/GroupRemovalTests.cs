@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressBookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
 
         [Test]
@@ -28,18 +28,17 @@ namespace WebAddressBookTests
             }
 
             // создаем список
-            List<GroupData> oldGroups = appManager.GroupHelper.GetGroupList();
-
+            List<GroupData> oldGroups = GroupData.GetAllGroups();
+            GroupData toBeRemoved = oldGroups[0];
             // удаляем группу
-            appManager.GroupHelper.RemoveGroup(0);
+            appManager.GroupHelper.RemoveGroup(toBeRemoved);
 
             // сравниваем хэш
             Assert.AreEqual(oldGroups.Count - 1, appManager.GroupHelper.GetGroupCount());
 
             // сравниваем содержимое
-            List<GroupData> newGroups = appManager.GroupHelper.GetGroupList();
-            // сохраняем Id удаляемой группы
-            GroupData toBeRemoved = oldGroups[0];
+            List<GroupData> newGroups = GroupData.GetAllGroups();
+            // сохраняем Id удаляемой группы            
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
             // сравниваем Id удаленной группы и группы, которая теперь на ее месте

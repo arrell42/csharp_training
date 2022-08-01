@@ -49,6 +49,7 @@ namespace WebAddressBookTests
             };
         }
 
+
         /*
         public ContactData GetContactInformationFromDetails()
         {
@@ -87,9 +88,26 @@ namespace WebAddressBookTests
             return this;
         }
 
+        public ContactHelper RemoveContact(ContactData contact)
+        {
+            SelectContact(contact.Id);
+            ClickDeleteButton();
+            driver.SwitchTo().Alert().Accept();
+            Thread.Sleep(4000);
+            return this;
+        }
+
         public ContactHelper ModifyContact(int v, ContactData newData)
         {
             EditContactButtonClick(v);
+            FillContactForm(newData);
+            UpdateContact();
+            manager.NavigationHelper.OpenHomePage();
+            return this;
+        }
+        public ContactHelper ModifyContact(ContactData contact, ContactData newData)
+        {
+            EditContactButtonClick(contact.Id);
             FillContactForm(newData);
             UpdateContact();
             manager.NavigationHelper.OpenHomePage();
@@ -145,7 +163,13 @@ namespace WebAddressBookTests
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + (index+2) + "]/td/input")).Click();
             return this;
         }
-        
+
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.XPath("//input[@name = 'selected[]'  and @value = '"+id+"']")).Click();
+            return this;
+        }
+
         public ContactHelper UpdateContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
@@ -156,6 +180,12 @@ namespace WebAddressBookTests
         public ContactHelper EditContactButtonClick(int index)
         {
             driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+ (index+2) +"]/td[8]/a")).Click();
+            return this;
+        }
+
+        public ContactHelper EditContactButtonClick(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href = 'edit.php?id="+id+"']")).Click();
             return this;
         }
 
