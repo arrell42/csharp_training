@@ -12,6 +12,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Linq;
 
 
 namespace WebAddressBookTests
@@ -90,9 +91,6 @@ namespace WebAddressBookTests
 
 
 
-
-
-
         [Test, TestCaseSource("GroupDataFromExcelFile")]        
         public void GroupCreationTest(GroupData group)
         {   
@@ -107,6 +105,21 @@ namespace WebAddressBookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+        }
+
+        [Test]
+        public void TestDBGroupsConnect()
+        {
+            DateTime start = DateTime.Now;
+            appManager.GroupHelper.GetGroupList();
+            DateTime end = DateTime.Now;
+            Console.Out.WriteLine(end.Subtract(start));
+
+
+            start = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAllGroups();  
+            end = DateTime.Now;
+            Console.Out.WriteLine(end.Subtract(start));
         }
 
     }

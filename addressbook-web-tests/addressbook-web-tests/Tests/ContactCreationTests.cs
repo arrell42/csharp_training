@@ -12,6 +12,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Linq;
 
 namespace WebAddressBookTests
 {
@@ -96,8 +97,21 @@ namespace WebAddressBookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
-        }                
+        }
 
+        [Test]
+        public void TestDBContactsConnect()
+        {
+            DateTime start = DateTime.Now;
+            appManager.ContactHelper.GetContactList();
+            DateTime end = DateTime.Now;
+            Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<ContactData> fromDb = ContactData.GetAllContacts();                       
+            end = DateTime.Now;
+            Console.Out.WriteLine(end.Subtract(start));
+        }
     }
 }
 
